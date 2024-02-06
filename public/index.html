@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Socket.IO Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js" integrity="sha512-tE1z+95+lMCGwy+9PnKgUSIeHhvioC9lMlI7rLWU0Ps3XTdjRygLcy4mLuL0JAoK4TLdQEyP0yOl/9dMOqpH/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        #chat-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        #messages {
+            margin-top: 20px;
+            border-top: 1px solid #ced4da;
+            padding-top: 10px;
+        }
+
+        #messages p {
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        button {
+            display: block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chat-container">
+        <label for="message">Message:</label>
+        <input id="message" type="text" class="form-control">
+        <button id="send" class="btn btn-primary">Send Message</button>
+
+        <!-- Add an area for messages displayed on the screen -->
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var socket = io.connect("http://localhost:3000");
+
+            socket.on('serverMessage', function (data) {
+                console.log('Server message:', data.value);
+
+                // Displaying the message from the server on the screen
+                $("#messages").append("<p>" + data.value + "</p>");
+            });
+
+            $("#send").click(function () {
+                var message = $('#message').val();
+                socket.emit('clientMessage', { value: message });
+
+                // Clear the input after sending
+                $('#message').val('');
+            });
+        });
+    </script>
+</body>
+
+</html>
