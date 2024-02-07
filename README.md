@@ -42,4 +42,4 @@ If you wish to contribute to the project, please follow these steps:
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for more information.
+This project is licensed under the MIT License. See [LICENSE](LICENSE.md) for more information.
