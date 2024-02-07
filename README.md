@@ -2,6 +2,8 @@
 
 This project is a simple Socket.IO-based chat application developed to facilitate real-time communication between users.
 
+![Simple Socket Chat](docs/banner.png)
+
 ## Getting Started
 
 Clone the project to your local machine and follow the steps below:
